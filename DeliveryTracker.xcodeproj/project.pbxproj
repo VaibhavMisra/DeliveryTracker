@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EE0A07CD214E62AA003E9EAD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A07CC214E62AA003E9EAD /* Helper.swift */; };
+		EEE79476214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
+		EEE79477214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
+		EEE79478214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
 		EEFCE24B214D238700C8F7B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */; };
 		EEFCE252214D238800C8F7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEFCE251214D238800C8F7B3 /* Assets.xcassets */; };
 		EEFCE255214D238800C8F7B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEFCE253214D238800C8F7B3 /* LaunchScreen.storyboard */; };
@@ -43,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		EE0A07CC214E62AA003E9EAD /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		EEFCE247214D238700C8F7B3 /* DeliveryTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEFCE251214D238800C8F7B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				EEFCE278214D2BF700C8F7B3 /* DeliveryListViewController.swift */,
+				EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE0A07CD214E62AA003E9EAD /* Helper.swift in Sources */,
+				EEE79476214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */,
 				EEFCE279214D2BF700C8F7B3 /* DeliveryListViewController.swift in Sources */,
 				EEFCE27E214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
 				EEFCE281214D392600C8F7B3 /* Location.swift in Sources */,
@@ -297,6 +303,7 @@
 			files = (
 				EEFCE27A214D2BF700C8F7B3 /* DeliveryListViewController.swift in Sources */,
 				EEFCE27F214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
+				EEE79477214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */,
 				EEFCE282214D392600C8F7B3 /* Location.swift in Sources */,
 				EEFCE260214D238900C8F7B3 /* DeliveryTrackerTests.swift in Sources */,
 			);
@@ -308,6 +315,7 @@
 			files = (
 				EEFCE27B214D2BF700C8F7B3 /* DeliveryListViewController.swift in Sources */,
 				EEFCE280214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
+				EEE79478214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */,
 				EEFCE283214D392600C8F7B3 /* Location.swift in Sources */,
 				EEFCE26B214D238900C8F7B3 /* DeliveryTrackerUITests.swift in Sources */,
 			);

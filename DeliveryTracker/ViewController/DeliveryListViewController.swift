@@ -51,7 +51,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         
         cell.imageView?.translatesAutoresizingMaskIntoConstraints = false
         cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
-        let leadingContraintImageView = NSLayoutConstraint(item: cell.imageView!, attribute: .leading, relatedBy: .equal, toItem: cell.imageView?.superview!, attribute: .leadingMargin, multiplier: 1.0, constant: 8.0)
+        let leadingContraintImageView = NSLayoutConstraint(item: cell.imageView!, attribute: .leading, relatedBy: .equal, toItem: cell.imageView?.superview!, attribute: .leadingMargin, multiplier: 1.0, constant: 2.0)
         let widthConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 88.0)
         let aspectRationConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy:.equal , toItem: cell.imageView!, attribute: .height, multiplier: 1.0, constant: 0)
         let leadingContraint = NSLayoutConstraint(item: cell.textLabel!, attribute: .left, relatedBy: .equal, toItem: cell.imageView!, attribute: .right, multiplier: 1.0, constant: 8.0)
@@ -66,6 +66,14 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         cell.textLabel!.text = delivery.description
         cell.imageView?.imageFromServerURL(delivery.imageUrl, placeHolder: UIImage(named: "DeliveryPlaceholder"))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DeliveryDetailViewController()
+        if let del = deliveries?[indexPath.row] {
+            detailVC.delivery = del
+        }
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     //MARK: - API method

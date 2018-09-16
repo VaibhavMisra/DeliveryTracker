@@ -13,6 +13,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     var tableView: UITableView!
     var deliveries: [DeliveryDetail]?
     
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -49,13 +50,15 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         
         cell.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
         let leadingContraintImageView = NSLayoutConstraint(item: cell.imageView!, attribute: .leading, relatedBy: .equal, toItem: cell.imageView?.superview!, attribute: .leadingMargin, multiplier: 1.0, constant: 8.0)
         let widthConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 88.0)
         let aspectRationConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy:.equal , toItem: cell.imageView!, attribute: .height, multiplier: 1.0, constant: 0)
         let leadingContraint = NSLayoutConstraint(item: cell.textLabel!, attribute: .left, relatedBy: .equal, toItem: cell.imageView!, attribute: .right, multiplier: 1.0, constant: 8.0)
+        let horizontalAlignmentConstraint = NSLayoutConstraint(item: cell.textLabel!, attribute: .centerY, relatedBy: .equal, toItem: cell.imageView!, attribute: .centerY, multiplier: 1.0, constant: 0)
         cell.imageView?.contentMode = .scaleAspectFit
         cell.imageView?.addConstraint(aspectRationConstraint)
-        NSLayoutConstraint.activate([leadingContraintImageView, widthConstraint,aspectRationConstraint, leadingContraint])
+        NSLayoutConstraint.activate([leadingContraintImageView, widthConstraint,aspectRationConstraint, leadingContraint, horizontalAlignmentConstraint])
         cell.textLabel!.numberOfLines = 0
         cell.imageView?.layoutIfNeeded()
         
@@ -90,7 +93,6 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
             } catch let err {
                 print(err)
             }
-            
         }.resume()
     }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE0A07CD214E62AA003E9EAD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A07CC214E62AA003E9EAD /* Helper.swift */; };
 		EEFCE24B214D238700C8F7B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */; };
 		EEFCE252214D238800C8F7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEFCE251214D238800C8F7B3 /* Assets.xcassets */; };
 		EEFCE255214D238800C8F7B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEFCE253214D238800C8F7B3 /* LaunchScreen.storyboard */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EE0A07CC214E62AA003E9EAD /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		EEFCE247214D238700C8F7B3 /* DeliveryTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEFCE251214D238800C8F7B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */,
+				EE0A07CC214E62AA003E9EAD /* Helper.swift */,
 				EEFCE285214D394400C8F7B3 /* ViewController */,
 				EEFCE284214D393000C8F7B3 /* Model */,
 				EEFCE251214D238800C8F7B3 /* Assets.xcassets */,
@@ -280,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE0A07CD214E62AA003E9EAD /* Helper.swift in Sources */,
 				EEFCE279214D2BF700C8F7B3 /* DeliveryListViewController.swift in Sources */,
 				EEFCE27E214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
 				EEFCE281214D392600C8F7B3 /* Location.swift in Sources */,

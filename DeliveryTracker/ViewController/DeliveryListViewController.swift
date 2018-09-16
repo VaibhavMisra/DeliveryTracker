@@ -28,9 +28,11 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     //MARK: - UI
     private func setupUI() {
         self.view.backgroundColor = UIColor.white
+        self.title = "Things to Deliver"
         tableView = UITableView(frame: view.frame, style: .plain)
         tableView?.dataSource = self
         tableView?.delegate = self
+        tableView.rowHeight = 100.0
         self.view.addSubview(tableView!)
     }
     
@@ -45,25 +47,27 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        
+        cell.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        let leadingContraintImageView = NSLayoutConstraint(item: cell.imageView!, attribute: .leading, relatedBy: .equal, toItem: cell.imageView?.superview!, attribute: .leadingMargin, multiplier: 1.0, constant: 8.0)
+        let widthConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 88.0)
+        let aspectRationConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy:.equal , toItem: cell.imageView!, attribute: .height, multiplier: 1.0, constant: 0)
+        let leadingContraint = NSLayoutConstraint(item: cell.textLabel!, attribute: .left, relatedBy: .equal, toItem: cell.imageView!, attribute: .right, multiplier: 1.0, constant: 8.0)
+        cell.imageView?.contentMode = .scaleAspectFit
+        cell.imageView?.addConstraint(aspectRationConstraint)
+        NSLayoutConstraint.activate([leadingContraintImageView, widthConstraint,aspectRationConstraint, leadingContraint])
+        cell.textLabel!.numberOfLines = 0
+        cell.imageView?.layoutIfNeeded()
+        
         let delivery = deliveries![indexPath.row]
         cell.textLabel!.text = delivery.description
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            let url = URL(string: delivery.imageUrl)
-//            let session = URLSession(configuration: URLSessionConfiguration.default)
-//            session.dataTask(with: url!, completionHandler: { (data, response, error) in
-//                guard let data = data else {return}
-//                let image = UIImage(data: data)
-//                DispatchQueue.main.async {
-//                    cell.imageView?.image = image
-//                }
-//            }).resume()
-//        }
+        cell.imageView?.imageFromServerURL(delivery.imageUrl, placeHolder: UIImage(named: "DeliveryPlaceholder"))
         return cell
     }
     
     //MARK: - API method
     private func getDeliveryList() {
-        guard let url = URL(string: "http://localhost:8080/deliveries?limit=10&offset=0") else {
+        guard let url = URL(string: "http://localhost:8080/deliveries?limit=100&offset=0") else {
             return
         }
         let config = URLSessionConfiguration.default
@@ -89,15 +93,5 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
             
         }.resume()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

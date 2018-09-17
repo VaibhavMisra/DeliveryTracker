@@ -78,7 +78,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     
     //MARK: - API method
     private func getDeliveryList() {
-        guard let url = URL(string: "http://localhost:8080/deliveries?limit=100&offset=0") else {
+        guard let url = URL(string: "https://mock-api-mobile.dev.lalamove.com/deliveries?limit=20&offset=0") else {
             return
         }
         let config = URLSessionConfiguration.default

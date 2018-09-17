@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE0A07CD214E62AA003E9EAD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A07CC214E62AA003E9EAD /* Helper.swift */; };
+		EE27EFE1214FE0140037A371 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE27EFE0214FE0140037A371 /* MapKit.framework */; };
 		EEE79476214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
 		EEE79477214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
 		EEE79478214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		EE0A07CC214E62AA003E9EAD /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		EE27EFE0214FE0140037A371 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		EEFCE247214D238700C8F7B3 /* DeliveryTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE27EFE1214FE0140037A371 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE27EFDF214FE0140037A371 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE27EFE0214FE0140037A371 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EEFCE23E214D238700C8F7B3 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +106,7 @@
 				EEFCE25E214D238900C8F7B3 /* DeliveryTrackerTests */,
 				EEFCE269214D238900C8F7B3 /* DeliveryTrackerUITests */,
 				EEFCE248214D238700C8F7B3 /* Products */,
+				EE27EFDF214FE0140037A371 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -226,6 +238,11 @@
 				TargetAttributes = {
 					EEFCE246214D238700C8F7B3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EEFCE25A214D238900C8F7B3 = {
 						CreatedOnToolsVersion = 9.4.1;

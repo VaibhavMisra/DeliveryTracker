@@ -33,7 +33,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         tableView = UITableView(frame: view.frame, style: .plain)
         tableView?.dataSource = self
         tableView?.delegate = self
-        tableView.rowHeight = 100.0
+        tableView.register(DeliveryImageTableViewCell.self, forCellReuseIdentifier: "delCell")
         self.view.addSubview(tableView!)
     }
     
@@ -46,25 +46,18 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         return deliveries == nil ? 0 : deliveries!.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         
-        cell.imageView?.translatesAutoresizingMaskIntoConstraints = false
-        cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
-        let leadingContraintImageView = NSLayoutConstraint(item: cell.imageView!, attribute: .leading, relatedBy: .equal, toItem: cell.imageView?.superview!, attribute: .leadingMargin, multiplier: 1.0, constant: 2.0)
-        let widthConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 88.0)
-        let aspectRationConstraint = NSLayoutConstraint(item: cell.imageView!, attribute: .width, relatedBy:.equal , toItem: cell.imageView!, attribute: .height, multiplier: 1.0, constant: 0)
-        let leadingContraint = NSLayoutConstraint(item: cell.textLabel!, attribute: .left, relatedBy: .equal, toItem: cell.imageView!, attribute: .right, multiplier: 1.0, constant: 8.0)
-        let horizontalAlignmentConstraint = NSLayoutConstraint(item: cell.textLabel!, attribute: .centerY, relatedBy: .equal, toItem: cell.imageView!, attribute: .centerY, multiplier: 1.0, constant: 0)
-        cell.imageView?.contentMode = .scaleAspectFit
-        cell.imageView?.addConstraint(aspectRationConstraint)
-        NSLayoutConstraint.activate([leadingContraintImageView, widthConstraint,aspectRationConstraint, leadingContraint, horizontalAlignmentConstraint])
-        cell.textLabel!.numberOfLines = 0
-        cell.imageView?.layoutIfNeeded()
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "delCell", for: indexPath) as! DeliveryImageTableViewCell
         let delivery = deliveries![indexPath.row]
-        cell.textLabel!.text = delivery.description
-        cell.imageView?.imageFromServerURL(delivery.imageUrl, placeHolder: UIImage(named: "DeliveryPlaceholder"))
+        
+        cell.descLabel.text = delivery.description
+        cell.loadImageFrom(url: delivery.imageUrl, placeHolder: UIImage(named: "DeliveryPlaceholder"))
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
@@ -72,6 +65,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         let detailVC = DeliveryDetailViewController()
         if let del = deliveries?[indexPath.row] {
             detailVC.delivery = del
+            detailVC.image = imageCache.object(forKey: NSString(string: del.imageUrl))
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -93,7 +87,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
             do {
                 let decoder = JSONDecoder()
                 let deliveries = try decoder.decode([DeliveryDetail].self, from: json)
-                self.deliveries = deliveries
+                self.deliveries = deliveries.sorted(by: { $0.id < $1.id })
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

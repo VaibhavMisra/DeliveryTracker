@@ -45,6 +45,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     private func setupUI() {
         self.view.backgroundColor = UIColor.white
         self.title = "Things to Deliver"
+        self.navigationItem.backBarButtonItem?.title = ""
         setupTableView()
     }
     

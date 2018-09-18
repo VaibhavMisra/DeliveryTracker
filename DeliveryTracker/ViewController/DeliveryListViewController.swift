@@ -20,6 +20,13 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         getDeliveryList()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let selected = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selected, animated: true)
+        }
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -27,14 +34,18 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //MARK: - UI
-    private func setupUI() {
-        self.view.backgroundColor = UIColor.white
-        self.title = "Things to Deliver"
+    fileprivate func setupTableView() {
         tableView = UITableView(frame: view.frame, style: .plain)
         tableView?.dataSource = self
         tableView?.delegate = self
         tableView.register(DeliveryImageTableViewCell.self, forCellReuseIdentifier: "delCell")
         self.view.addSubview(tableView!)
+    }
+    
+    private func setupUI() {
+        self.view.backgroundColor = UIColor.white
+        self.title = "Things to Deliver"
+        setupTableView()
     }
     
     //MARK: - Tableview Data source
@@ -70,6 +81,18 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
+    //MARK: - Helper methods
+    fileprivate func loadSavedDeliveries() {
+        if let deliveriesEncoded = UserDefaults.standard.object(forKey: "Deliveries") as? Data {
+            if let deliveries = try? JSONDecoder().decode([DeliveryDetail].self, from: deliveriesEncoded) {
+                self.deliveries = deliveries
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
     //MARK: - API method
     private func getDeliveryList() {
         guard let url = URL(string: "https://mock-api-mobile.dev.lalamove.com/deliveries?limit=20&offset=0") else {
@@ -81,6 +104,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         session.dataTask(with: url) { (data, response, error) in
             guard error == nil, let json = data else {
                 print(error.debugDescription)
+                self.loadSavedDeliveries()
                 return
             }
             
@@ -92,8 +116,10 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
                     self.tableView.reloadData()
                 }
                 print(deliveries)
+                UserDefaults.standard.set(json, forKey: "Deliveries")
             } catch let err {
                 print(err)
+                self.loadSavedDeliveries()
             }
         }.resume()
     }

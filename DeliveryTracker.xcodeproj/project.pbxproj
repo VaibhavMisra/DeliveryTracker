@@ -11,6 +11,9 @@
 		EE7855B4215131F6003A98A6 /* DeliveryImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7855B3215131F6003A98A6 /* DeliveryImageTableViewCell.swift */; };
 		EE7855B5215131F6003A98A6 /* DeliveryImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7855B3215131F6003A98A6 /* DeliveryImageTableViewCell.swift */; };
 		EE7855B6215131F6003A98A6 /* DeliveryImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7855B3215131F6003A98A6 /* DeliveryImageTableViewCell.swift */; };
+		EEB6C79121552797007B3E57 /* DeliveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB6C79021552797007B3E57 /* DeliveryRequest.swift */; };
+		EEB6C79221552797007B3E57 /* DeliveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB6C79021552797007B3E57 /* DeliveryRequest.swift */; };
+		EEB6C79321552797007B3E57 /* DeliveryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB6C79021552797007B3E57 /* DeliveryRequest.swift */; };
 		EEE79476214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
 		EEE79477214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
 		EEE79478214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */; };
@@ -50,6 +53,7 @@
 /* Begin PBXFileReference section */
 		EE27EFE0214FE0140037A371 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EE7855B3215131F6003A98A6 /* DeliveryImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryImageTableViewCell.swift; sourceTree = "<group>"; };
+		EEB6C79021552797007B3E57 /* DeliveryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryRequest.swift; sourceTree = "<group>"; };
 		EEE79475214E7B6A00C0F209 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		EEFCE247214D238700C8F7B3 /* DeliveryTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +113,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EEB6C78F21552783007B3E57 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				EEB6C79021552797007B3E57 /* DeliveryRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		EEFCE23E214D238700C8F7B3 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				EEFCE24A214D238700C8F7B3 /* AppDelegate.swift */,
+				EEB6C78F21552783007B3E57 /* Networking */,
 				EE7855B2215131DD003A98A6 /* View */,
 				EEFCE285214D394400C8F7B3 /* ViewController */,
 				EEFCE284214D393000C8F7B3 /* Model */,
@@ -319,6 +332,7 @@
 				EEFCE279214D2BF700C8F7B3 /* DeliveryListViewController.swift in Sources */,
 				EEFCE27E214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
 				EE7855B4215131F6003A98A6 /* DeliveryImageTableViewCell.swift in Sources */,
+				EEB6C79121552797007B3E57 /* DeliveryRequest.swift in Sources */,
 				EEFCE281214D392600C8F7B3 /* Location.swift in Sources */,
 				EEFCE24B214D238700C8F7B3 /* AppDelegate.swift in Sources */,
 			);
@@ -332,6 +346,7 @@
 				EEFCE27F214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
 				EEE79477214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */,
 				EEFCE282214D392600C8F7B3 /* Location.swift in Sources */,
+				EEB6C79221552797007B3E57 /* DeliveryRequest.swift in Sources */,
 				EE7855B5215131F6003A98A6 /* DeliveryImageTableViewCell.swift in Sources */,
 				EEFCE260214D238900C8F7B3 /* DeliveryTrackerTests.swift in Sources */,
 			);
@@ -345,6 +360,7 @@
 				EEFCE280214D392600C8F7B3 /* DeliveryDetail.swift in Sources */,
 				EEE79478214E7B6A00C0F209 /* DeliveryDetailViewController.swift in Sources */,
 				EEFCE283214D392600C8F7B3 /* Location.swift in Sources */,
+				EEB6C79321552797007B3E57 /* DeliveryRequest.swift in Sources */,
 				EE7855B6215131F6003A98A6 /* DeliveryImageTableViewCell.swift in Sources */,
 				EEFCE26B214D238900C8F7B3 /* DeliveryTrackerUITests.swift in Sources */,
 			);

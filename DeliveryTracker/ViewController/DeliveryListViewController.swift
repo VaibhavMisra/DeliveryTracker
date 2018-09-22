@@ -26,7 +26,6 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         if let selected = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selected, animated: true)
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,7 +130,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
                     DispatchQueue.main.async {
                         self.tableView.insertRows(at: newRows, with: .top)
                         self.tableView.scrollToRow(at: newRows.first!,
-                                                   at: .middle, animated: true)
+                                                   at: .bottom, animated: true)
                     }
                 }
                 let deliveriesData = try? JSONEncoder().encode(self.deliveries)

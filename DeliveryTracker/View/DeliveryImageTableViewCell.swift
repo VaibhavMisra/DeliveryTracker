@@ -59,28 +59,30 @@ class DeliveryImageTableViewCell: UITableViewCell {
             return
         }
         
-        if let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                
-                if error != nil {
-                    print("ERROR LOADING IMAGES FROM URL: \(error!)")
-                    DispatchQueue.main.async {
-                        self.delImageView.image = placeHolder
-                    }
-                    return
-                }
+        guard let url = URL(string: urlString) else { return }
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .returnCacheDataElseLoad
+        let session = URLSession(configuration: config)
+        session.dataTask(with: url,
+                         completionHandler: { (data, response, error) in
+
+            if error != nil {
+                print("ERROR LOADING IMAGES FROM URL: \(error!)")
                 DispatchQueue.main.async {
-                    if let data = data {
-                        if let downloadedImage = UIImage(data: data) {
-                            imageCache.setObject(downloadedImage, forKey: NSString(string: urlString))
-                            if(self.imageURL == urlString) {
-                                self.delImageView.image = downloadedImage
-                            }
-                        }
+                    self.delImageView.image = placeHolder
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                if let data = data, let downloadedImage = UIImage(data: data) {
+                    imageCache.setObject(downloadedImage,
+                                         forKey: NSString(string: urlString))
+                    if(self.imageURL == urlString) {
+                        self.delImageView.image = downloadedImage
                     }
                 }
-            }).resume()
-        }
+            }
+        }).resume()
     }
     
 }

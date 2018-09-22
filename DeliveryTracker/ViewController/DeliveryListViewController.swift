@@ -11,6 +11,7 @@ import UIKit
 class DeliveryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var tableView: UITableView!
+    var msgLabel: UILabel!
     var deliveries = [DeliveryDetail]()
     let request = DeliveryRequest()
     
@@ -40,7 +41,15 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         tableView?.delegate = self
         tableView.register(DeliveryImageTableViewCell.self, forCellReuseIdentifier: "delCell")
         tableView.tableFooterView = UIView()
-        self.view.addSubview(tableView!)
+        self.view.addSubview(tableView)
+    }
+    
+    fileprivate func setupMsgLabel() {
+        msgLabel = UILabel(frame: view.frame)
+        msgLabel.text = ""
+        msgLabel.textAlignment = .center
+        msgLabel.isHidden = true
+        self.view.addSubview(msgLabel)
     }
     
     private func setupUI() {
@@ -48,6 +57,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         self.title = "Things to Deliver"
         self.navigationItem.backBarButtonItem?.title = ""
         setupTableView()
+        setupMsgLabel()
     }
     
     //MARK: - Tableview Data source
@@ -93,14 +103,19 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     
     //MARK: - Helper methods
     fileprivate func loadSavedDeliveries() {
-        if let deliveriesEncoded = UserDefaults.standard.object(forKey: "Deliveries") as? Data {
-            if let deliveries = try? JSONDecoder().decode([DeliveryDetail].self,
+        if let deliveriesEncoded = UserDefaults.standard.object(forKey: "Deliveries") as? Data,
+            let deliveries = try? JSONDecoder().decode([DeliveryDetail].self,
                                                           from: deliveriesEncoded) {
-                self.deliveries = deliveries
-                self.request.offset = deliveries.count
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            self.deliveries = deliveries
+            self.request.offset = deliveries.count
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        else {
+            DispatchQueue.main.async {
+                self.msgLabel.text = "Could not load data.."
+                self.msgLabel.isHidden = false
             }
         }
     }

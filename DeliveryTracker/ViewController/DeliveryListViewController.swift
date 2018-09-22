@@ -39,6 +39,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         tableView?.dataSource = self
         tableView?.delegate = self
         tableView.register(DeliveryImageTableViewCell.self, forCellReuseIdentifier: "delCell")
+        tableView.tableFooterView = UIView()
         self.view.addSubview(tableView!)
     }
     

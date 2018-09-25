@@ -18,13 +18,11 @@ class DeliveryImageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        // Configure the view for the selected state
         delImageView.translatesAutoresizingMaskIntoConstraints = false
         descLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -41,7 +39,6 @@ class DeliveryImageTableViewCell: UITableViewCell {
         descLabel.bottomAnchor.constraint(equalTo: delImageView.bottomAnchor).isActive = true
         descLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5.0).isActive = true
         
-        
         descLabel.numberOfLines = 0
         delImageView.contentMode = .scaleAspectFit
     }
@@ -50,7 +47,16 @@ class DeliveryImageTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func loadImageFrom(url urlString: String, placeHolder: UIImage?) {
+    //MARK: - Public methods
+    public func configure(desc: String, url:String) {
+        self.descLabel.text = desc
+        self.loadImageFrom(url: url,
+                           placeHolder: UIImage(named: "DeliveryPlaceholder"))
+        self.accessoryType = .disclosureIndicator
+    }
+    
+    //MARK: - Private helper methods
+    fileprivate func loadImageFrom(url urlString: String, placeHolder: UIImage?) {
         
         self.imageURL = urlString
         self.delImageView.image = placeHolder

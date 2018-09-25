@@ -20,7 +20,6 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         setupUI()
         getNextDeliveryList()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,7 +30,6 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: - UI
@@ -41,6 +39,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         tableView?.delegate = self
         tableView.register(DeliveryImageTableViewCell.self, forCellReuseIdentifier: "delCell")
         tableView.tableFooterView = UIView()
+        tableView.rowHeight = 100.0
         self.view.addSubview(tableView)
     }
     
@@ -61,28 +60,16 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //MARK: - Tableview Data source
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return deliveries.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "delCell",
                                                  for: indexPath) as! DeliveryImageTableViewCell
         let delivery = deliveries[indexPath.row]
-        
-        cell.descLabel.text = delivery.description
-        cell.loadImageFrom(url: delivery.imageUrl,
-                           placeHolder: UIImage(named: "DeliveryPlaceholder"))
-        cell.accessoryType = .disclosureIndicator
+        cell.configure(desc: delivery.description, url: delivery.imageUrl)
         return cell
     }
     

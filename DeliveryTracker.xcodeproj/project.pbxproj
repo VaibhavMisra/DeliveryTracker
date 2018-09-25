@@ -261,6 +261,7 @@
 				TargetAttributes = {
 					EEFCE246214D238700C8F7B3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -269,10 +270,12 @@
 					};
 					EEFCE25A214D238900C8F7B3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = EEFCE246214D238700C8F7B3;
 					};
 					EEFCE265214D238900C8F7B3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = EEFCE246214D238700C8F7B3;
 					};
 				};
@@ -520,7 +523,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vaibhavmisra.DeliveryTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -538,7 +541,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vaibhavmisra.DeliveryTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -558,7 +561,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vaibhavmisra.DeliveryTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeliveryTracker.app/DeliveryTracker";
 			};
@@ -579,7 +582,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vaibhavmisra.DeliveryTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeliveryTracker.app/DeliveryTracker";
 			};
@@ -599,7 +602,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vaibhavmisra.DeliveryTrackerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DeliveryTracker;
 			};
@@ -619,7 +622,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vaibhavmisra.DeliveryTrackerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DeliveryTracker;
 			};

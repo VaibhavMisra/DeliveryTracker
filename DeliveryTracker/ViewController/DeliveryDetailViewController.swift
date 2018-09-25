@@ -51,8 +51,8 @@ class DeliveryDetailViewController: UIViewController {
         mapView.addAnnotation(annotation)
         
         let mapCenter = CLLocationCoordinate2DMake(loc.lat, loc.lng)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        let region = MKCoordinateRegionMake(mapCenter, span)
+        let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion.init(center: mapCenter, span: span)
         mapView.region = region
         
         self.view.addSubview(mapView)

@@ -107,10 +107,10 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    fileprivate func getNewIndexPaths(start: Int, count: Int) -> [IndexPath]? {
-        guard start >= 0, count > 0 else { return nil }
+    fileprivate func getNewIndexPaths(start: Int, new: Int) -> [IndexPath]? {
+        guard new > 0 else { return nil }
         var newIndexPaths = [IndexPath]()
-        for row in start...(start + count-1) {
+        for row in start...(start + new-1) {
             newIndexPaths.append(IndexPath(row: row, section: 0))
         }
         return newIndexPaths
@@ -123,18 +123,15 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
-            if let deliveries = deliveries{
-                let sorted = deliveries.sorted(by: { $0.id < $1.id })
-                let startRow = self.deliveries.count
-                let newRowCount = sorted.count
-                self.deliveries.append(contentsOf: sorted)
-                if let newRows = self.getNewIndexPaths(start: startRow,
-                                                       count: newRowCount) {
-                    DispatchQueue.main.async {
-                        self.tableView.insertRows(at: newRows, with: .top)
-                        self.tableView.scrollToRow(at: newRows.first!,
-                                                   at: .bottom, animated: true)
-                    }
+            if let newDeliveries = deliveries?.sorted(by: { $0.id < $1.id }),
+                let newRows = self.getNewIndexPaths(start: self.deliveries.count,
+                                                    new: newDeliveries.count) {
+                
+                self.deliveries.append(contentsOf: newDeliveries)
+                DispatchQueue.main.async {
+                    self.tableView.insertRows(at: newRows, with: .top)
+                    self.tableView.scrollToRow(at: newRows.first!,
+                                               at: .bottom, animated: true)
                 }
                 let deliveriesData = try? JSONEncoder().encode(self.deliveries)
                 UserDefaults.standard.set(deliveriesData, forKey: "Deliveries")

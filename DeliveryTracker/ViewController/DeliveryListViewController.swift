@@ -11,7 +11,6 @@ import UIKit
 class DeliveryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var tableView: UITableView!
-    var msgLabel: UILabel!
     var deliveries = [DeliveryDetail]()
     let request = DeliveryRequest()
     
@@ -43,24 +42,24 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         self.view.addSubview(tableView)
     }
     
-    fileprivate func setupMsgLabel() {
-        msgLabel = UILabel(frame: view.frame)
-        msgLabel.text = ""
-        msgLabel.textAlignment = .center
-        msgLabel.isHidden = true
-        self.view.addSubview(msgLabel)
-    }
-    
     private func setupUI() {
         self.view.backgroundColor = UIColor.white
         self.title = "Things to Deliver"
         self.navigationItem.backBarButtonItem?.title = ""
         setupTableView()
-        setupMsgLabel()
+    }
+    
+    fileprivate func getEmptyLabel() -> UILabel {
+        let msgLabel = UILabel(frame: view.frame)
+        msgLabel.text = ""
+        msgLabel.textAlignment = .center
+        msgLabel.text = "Could not load data.."
+        return msgLabel
     }
     
     //MARK: - Tableview Data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.backgroundView = deliveries.count == 0 ? getEmptyLabel() : nil
         return deliveries.count
     }
 
@@ -97,12 +96,6 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
             self.request.offset = deliveries.count
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-            }
-        }
-        else {
-            DispatchQueue.main.async {
-                self.msgLabel.text = "Could not load data.."
-                self.msgLabel.isHidden = false
             }
         }
     }

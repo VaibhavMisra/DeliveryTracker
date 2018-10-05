@@ -13,6 +13,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     var tableView: UITableView!
     var deliveries = [DeliveryDetail]()
     let request = DeliveryRequest()
+    var isInitialLoadDone = false
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -65,7 +66,7 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     
     //MARK: - Tableview Data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.backgroundView = deliveries.count == 0 ? getEmptyLabel() : nil
+        tableView.backgroundView = deliveries.count == 0 && isInitialLoadDone ? getEmptyLabel() : nil
         return deliveries.count
     }
 
@@ -121,6 +122,9 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         request.getNextDeliveries { (deliveries) in
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+            if self.isInitialLoadDone == false {
+                self.isInitialLoadDone = true
             }
             if let newDeliveries = deliveries?.sorted(by: { $0.id < $1.id }),
                 let newRows = self.getNewIndexPaths(start: self.deliveries.count,

@@ -33,13 +33,19 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     
     //MARK: - UI
     fileprivate func setupTableView() {
-        tableView = UITableView(frame: view.frame, style: .plain)
+        tableView = UITableView()
         tableView?.dataSource = self
         tableView?.delegate = self
         tableView.register(DeliveryImageTableViewCell.self, forCellReuseIdentifier: "delCell")
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 100.0
         self.view.addSubview(tableView)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     private func setupUI() {

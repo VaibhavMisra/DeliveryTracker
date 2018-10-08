@@ -10,10 +10,11 @@ import UIKit
 
 class DeliveryListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var tableView: UITableView!
-    var deliveries = [DeliveryDetail]()
-    let request = DeliveryRequest()
-    var isInitialLoadDone = false
+    private var tableView: UITableView!
+    private let refreshControl = UIRefreshControl()
+    private var deliveries = [DeliveryDetail]()
+    private let request = DeliveryRequest()
+    private var isInitialLoadDone = false
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -53,6 +54,8 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
         self.view.backgroundColor = UIColor.white
         self.title = "Things to Deliver"
         self.navigationItem.backBarButtonItem?.title = ""
+        refreshControl.addTarget(self, action: #selector(getNextDeliveryList),
+                                 for: .valueChanged)
         setupTableView()
     }
     
@@ -66,7 +69,14 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     
     //MARK: - Tableview Data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.backgroundView = deliveries.count == 0 && isInitialLoadDone ? getEmptyLabel() : nil
+        if deliveries.count == 0 && isInitialLoadDone {
+            tableView.addSubview(refreshControl)
+            tableView.backgroundView = getEmptyLabel()
+        }
+        else {
+            refreshControl.removeFromSuperview()
+            tableView.backgroundView =  nil
+        }
         return deliveries.count
     }
 
@@ -101,9 +111,9 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
                                                           from: deliveriesEncoded) {
             self.deliveries = deliveries
             self.request.offset = deliveries.count
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -117,11 +127,14 @@ class DeliveryListViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //MARK: - API method
-    fileprivate func getNextDeliveryList() {
+    @objc fileprivate func getNextDeliveryList() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         request.getNextDeliveries { (deliveries) in
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
             }
             if self.isInitialLoadDone == false {
                 self.isInitialLoadDone = true
